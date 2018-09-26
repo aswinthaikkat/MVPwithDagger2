@@ -3,6 +3,11 @@ package com.example.user.mvpbasic;
 public class Ipresenter implements Contract.Presenter {
     private  Contract.View view;
     private  Contract.Model model;
+
+    public Ipresenter(Contract.Model model) {
+        this.model = model;
+    }
+
     @Override
     public void setView(Contract.View view) {
     this.view = view;

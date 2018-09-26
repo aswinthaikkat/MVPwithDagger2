@@ -6,6 +6,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.user.mvpbasic.Dagger2.MyApplication;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -14,13 +18,16 @@ public class MainActivity extends AppCompatActivity implements Contract.View{
     @BindView(R.id.firstName)  EditText firstName;
     @BindView(R.id.lastName)   EditText lastName;
     @BindView(R.id.DisplayHolder)  TextView displayHolder;
-    Ipresenter presenter = new Ipresenter();
+    @Inject
+    Contract.Presenter presenter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ((MyApplication) getApplication()).getNetComponent().inject(this);
+
         ButterKnife.bind(this);
         presenter.setView(this);
     }
